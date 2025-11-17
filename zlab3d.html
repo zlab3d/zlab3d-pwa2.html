@@ -1935,8 +1935,17 @@
     const blob = new Blob([swCode], {
       type: 'application/javascript'
     });
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).catch(console.error);
+  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+  navigator.serviceWorker.register(swUrl)
+    .then(reg => {
+      console.log('ServiceWorker registrado:', reg);
+    })
+    .catch(err => {
+      console.error('Erro ao registrar ServiceWorker:', err);
+    });
+} else {
+  console.log('ServiceWorker não registrado porque está rodando via', window.location.protocol);
+}
   }
 
   // ---------- INICIALIZAÇÃO ----------
