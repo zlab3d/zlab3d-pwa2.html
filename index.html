@@ -1935,16 +1935,17 @@
     const blob = new Blob([swCode], {
       type: 'application/javascript'
     });
-  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-  navigator.serviceWorker.register(swUrl)
+ if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+  navigator.serviceWorker.register('service-worker.js') // Certifique-se que 'service-worker.js' é o caminho correto
     .then(reg => {
-      console.log('ServiceWorker registrado:', reg);
+      console.log('ServiceWorker registrado com sucesso:', reg);
     })
     .catch(err => {
-      console.error('Erro ao registrar ServiceWorker:', err);
+      console.error('Falha ao registrar o ServiceWorker:', err);
     });
 } else {
   console.log('ServiceWorker não registrado porque está rodando via', window.location.protocol);
+};
 }
   }
 
